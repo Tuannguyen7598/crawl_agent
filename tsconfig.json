@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es2017",
+        "outDir": "./dist",
+        "strict": false,
+        "skipLibCheck": true,
+        "typeRoots": [
+            "node_modules/@types"
+        ],
+        "sourceMap": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "allowJs": true
+    },
+    "exclude": [
+        "dist",
+        "node_modules"
+    ]
+}
