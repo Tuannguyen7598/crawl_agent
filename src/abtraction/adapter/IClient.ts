@@ -1,3 +1,10 @@
+import {
+	DataDOM,
+	DataFromHttpResponse,
+	ResponseAgent,
+} from "../../infastructure/client/proto";
+
 export interface IClient {
-    sendData():Promise<any>
+	sendDataHttpResponse(payload: DataFromHttpResponse): Promise<ResponseAgent>;
+	sendDataDomHtlm(payload: DataDOM): Promise<ResponseAgent>;
 }

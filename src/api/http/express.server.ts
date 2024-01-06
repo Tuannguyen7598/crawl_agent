@@ -6,6 +6,7 @@ export class ExpressServer {
 	constructor(app: express.Application, private manager: SnsManager) {
 		app.post("/linkedln/start", this.onLinkedLnStart);
 		app.post("/upwork/start", this.onUpWorkStart);
+		app.post("/test", this.onTest);
 	}
 
 	onLinkedLnStart = (req: express.Request, res: express.Response) => {
@@ -25,5 +26,9 @@ export class ExpressServer {
 		const sns = new UpworkSns(session_id);
 		this.manager.createSns(sns);
 		res.status(200).json({ session_id: session_id });
+	};
+	onTest = (req: express.Request, res: express.Response) => {
+		this.manager.sendDataHttpResponse();
+		res.status(200).json({ status: "oke" });
 	};
 }

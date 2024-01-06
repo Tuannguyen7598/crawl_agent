@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+option go_package = "google.golang.org/grpc/examples/route_guide/gRPC.agent";
+option java_multiple_files = true;
+option java_package = "io.grpc.examples.routeguide";
+option java_outer_classname = "RouteGuideProto";
+
+package BasegRPC;
+
+service Agent {
+  rpc SendDataHTTP(DataFromHttpResponse) returns (ResponseAgent) {}
+  rpc SendDataDOM(DataDOM) returns (ResponseAgent) {}
+  rpc SendActionDOM(ActionDOM) returns (ResponseAgent) {}
+}
+
+message ActionDOM {
+  string sns = 1;
+  string session_id = 2;
+  string action_type = 3;
+  string payload = 4;
+}
+
+
+
+message DataDOM {
+  string type = 1;
+  string id = 2;
+  string name = 3;
+  string value = 4;
+  string innerText =5;
+  string timestamp = 6;
+}
+
+message DataFromHttpResponse {
+  string sns = 1;
+  string url = 2;
+  string body= 3;
+  string timestamp = 4;
+
+}
+
+message ResponseAgent {
+  bool status = 1;
+  string message = 2;
+}
+

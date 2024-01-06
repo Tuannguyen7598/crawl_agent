@@ -1,15 +1,20 @@
-
+import {
+	DataDOM,
+	DataFromHttpResponse,
+	ResponseAgent,
+} from "../../infastructure/client/proto";
 
 export interface ISNSListener {
-    onSendData(): void;
+	onSendDataHttpResponse(payload: DataFromHttpResponse): Promise<ResponseAgent>;
+	onSendDataDOMHtml(payload: DataDOM): Promise<ResponseAgent>;
 }
 
 export interface ISNS {
-    listener: ISNSListener | undefined;
-    session_id: string ;
+	listener: ISNSListener | undefined;
+	session_id: string;
 
-    inItWebBrowser():Promise<void>
-    startCrawlData():void
-    stopCrawlData():void
-    addScript():Promise<any>
+	inItWebBrowser(): Promise<void>;
+	startCrawlData(): void;
+	actionClick(payload: any): Promise<boolean>;
+	actionInput(payload: any): Promise<boolean>;
 }

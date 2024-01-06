@@ -1,48 +1,46 @@
 {
-  "name": "personal-sns-account-agent",
-  "version": "1.0.0",
-  "description": "Agent for connect to FB and Zalo",
-  "main": "dist/src/app.js",
-  "scripts": {
-    "start": "electron dist/app.js",
-    "serve": "node dist/app.js",
-    "watch-node": "nodemon node dist/app.js",
-    "build-ts": "tsc",
-    "watch-ts": "tsc -w",
-    "tslint": "tslint -c tslint.json -p tsconfig.json --fix",
-    "pack": "electron-builder --dir",
-    "dist": "electron-builder -mwl"
-  },
-  "keywords": [
-    "sns",
-    "zalo",
-    "facebook"
-  ],
-  "author": "giangndm",
-  "license": "ISC",
-  "devDependencies": {
-    "@types/body-parser": "^1.19.0",
-    "@types/cors": "^2.8.8",
-    "@types/debug": "0.0.30",
-    "@types/express": "^4.17.21",
-    "nodemon": "^1.18.2",
-    "ts-node": "^7.0.0",
-    "tslint": "^5.10.0",
-    "typescript": "^4.0.5"
-  },
-  "dependencies": {
-    "@types/request": "^2.48.5",
-    "axios": "^1.6.2",
-    "body-parser": "^1.19.0",
-    "cors": "^2.8.5",
-    "debug": "^4.2.0",
-    "electron": "^28.1.0",
-    "electron-store": "^8.1.0",
-    "express": "^4.18.2",
-    "form-data": "^4.0.0",
-    "jquery": "^3.6.4",
-    "node-persist": "^3.1.0",
-    "puppeteer": "^21.6.1",
-    "request": "^2.88.2"
-  }
+	"name": "sns-agent",
+	"version": "1.0.0",
+	"description": "Crawl data from web",
+	"main": "dist/src/app.js",
+	"scripts": {
+		"start": "electron dist/app.js",
+		"serve": "node dist/app.js",
+		"watch-node": "nodemon node dist/app.js",
+		"build-ts": "tsc",
+		"watch-ts": "tsc -w",
+		"tslint": "tslint -c tslint.json -p tsconfig.json --fix",
+		"pack": "electron-builder --dir",
+		"dist": "electron-builder -mwl"
+	},
+	"author": "Nguyen Quang Tuan",
+	"license": "ISC",
+	"devDependencies": {
+		"@types/body-parser": "^1.19.0",
+		"@types/cors": "^2.8.8",
+		"@types/debug": "0.0.30",
+		"@types/express": "^4.17.21",
+		"nodemon": "^1.18.2",
+		"ts-node": "^7.0.0",
+		"ts-proto": "^1.165.3",
+		"tslint": "^5.10.0",
+		"typescript": "^4.9.5"
+	},
+	"dependencies": {
+		"@grpc/grpc-js": "^1.9.13",
+		"@types/request": "^2.48.5",
+		"axios": "^1.6.2",
+		"body-parser": "^1.19.0",
+		"cors": "^2.8.5",
+		"debug": "^4.2.0",
+		"electron": "^28.1.0",
+		"electron-store": "^8.1.0",
+		"express": "^4.18.2",
+		"form-data": "^4.0.0",
+		"jquery": "^3.6.4",
+		"node-persist": "^3.1.0",
+		"protobufjs": "^7.2.5",
+		"puppeteer": "^21.6.1",
+		"request": "^2.88.2"
+	}
 }

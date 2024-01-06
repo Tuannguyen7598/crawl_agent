@@ -1,7 +1,12 @@
 export const Config_Variable = {
-    PORT_HTTP: process.env.PORT_HTTP || 3000,
-    AGENT_LOGIN_UPWORK_URL: process.env.AGENT_LOGIN_UPWORK_URL || "http://localhost:3000/upwork/start",
-    AGENT_LOGIN_LINKEDLN_URL: process.env.AGENT_LOGIN_LINKEDLN_URL || "http://localhost:3000/linkedln/start",
-    SNS_UPWORK: "upwork",
-    SNS_LINKEDLN: "linkedln",
-}
+	PORT_HTTP: process.env.PORT_HTTP || 3000,
+	PORT_GRPC: process.env.PORT_GRPC || "9999",
+	URL_CORE_CRAWL: process.env.URL_CORE_CRAWL || "127.0.0.1:5555",
+	AGENT_LOGIN_UPWORK_URL:
+		process.env.AGENT_LOGIN_UPWORK_URL || "http://localhost:3000/upwork/start",
+	AGENT_LOGIN_LINKEDLN_URL:
+		process.env.AGENT_LOGIN_LINKEDLN_URL ||
+		"http://localhost:3000/linkedln/start",
+	SNS_UPWORK: "upwork",
+	SNS_LINKEDLN: "linkedln",
+};
