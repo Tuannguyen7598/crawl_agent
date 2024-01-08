@@ -42,18 +42,14 @@ export class SnsManager {
 		payload: ServerUnaryCall<ActionDOM, ResponseAgent>,
 		callback: sendUnaryData<ResponseAgent>
 	) {
-		try {
-			const sns = this.findSns(payload.request.sessionId);
-			const result = await sns.sendActionDom(
-				payload.request.actionType,
-				payload.request.payload
-			);
-			if (result) {
-				callback(null, { message: "SUCCESS", status: true });
-			}
-			callback(null, { message: "ERROR", status: false });
-		} catch (error) {
-			callback(error);
+		const sns = this.findSns(payload.request.sessionId);
+		const result = await sns.sendActionDom(
+			payload.request.actionType,
+			payload.request.payload
+		);
+		if (result) {
+			callback(null, { message: "SUCCESS", status: true });
 		}
+		callback(null, { message: "ERROR", status: false });
 	}
 }

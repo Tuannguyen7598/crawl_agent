@@ -5,24 +5,20 @@
 	document.addEventListener("click", (ev) => {
 		const targetElement = ev.target;
 		ipcRenderer.send("dom_click", {
-			id: targetElement.id,
-			innerText: targetElement.innerText,
-			title: targetElement.title,
-			name: targetElement.name,
-			placeholder: targetElement.placeholder,
-			tagName: targetElement.tagName,
+			id: targetElement.id ?? "",
+			innerText: targetElement.innerText ?? "",
+			name: targetElement.name ?? "",
+			value: targetElement.value ?? "",
 		});
 	});
 
 	document.addEventListener("input", (ev) => {
 		const targetElement = ev.target;
 		ipcRenderer.send("dom_input", {
-			id: targetElement.id,
-			innerText: targetElement.innerText,
-			title: targetElement.title,
-			name: targetElement.name,
-			placeholder: targetElement.placeholder,
-			tagName: targetElement.tagName,
+			id: targetElement.id ?? "",
+			innerText: targetElement.innerText ?? "",
+			name: targetElement.name ?? "",
+			value: targetElement.value ?? "",
 		});
 	});
 

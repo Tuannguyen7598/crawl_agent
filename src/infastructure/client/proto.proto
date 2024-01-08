@@ -23,12 +23,12 @@ message ActionDOM {
 
 
 message DataDOM {
-  string type = 1;
-  string id = 2;
-  string name = 3;
-  string value = 4;
-  string innerText =5;
-  string timestamp = 6;
+  string sns = 1;
+  string type = 2;
+  string id = 3;
+  string name = 4;
+  string value = 5;
+  string innerText =6;
 }
 
 message DataFromHttpResponse {

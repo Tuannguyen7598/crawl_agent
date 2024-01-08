@@ -17,7 +17,6 @@ export class ClientgRPC implements IClient {
 		);
 	}
 	sendDataHttpResponse(payload: DataFromHttpResponse): Promise<ResponseAgent> {
-		console.log("send data");
 		return new Promise((resolve, reject) => {
 			this.client.sendDataHttp(payload, (error, response) => {
 				if (error) {
@@ -30,6 +29,8 @@ export class ClientgRPC implements IClient {
 	}
 
 	sendDataDomHtlm(payload: DataDOM): Promise<ResponseAgent> {
+		console.log("payload", payload);
+
 		return new Promise((resolve, reject) => {
 			this.client.sendDataDom(payload, (error, response) => {
 				if (error) {

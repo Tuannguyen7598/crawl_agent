@@ -14,10 +14,12 @@ export class UpworkSns implements ISNS {
 	constructor(public session_id: string) {
 		ipcMain.on("dom_click", (event, payload) => {
 			payload["type"] = "click";
+			payload["sns"] = "upwork";
 			this.onSendDataFromDomHTML(payload);
 		});
 		ipcMain.on("dom_input", (event, payload) => {
 			payload["type"] = "input";
+			payload["sns"] = "upwork";
 			this.onSendDataFromDomHTML(payload);
 		});
 	}
@@ -81,13 +83,12 @@ export class UpworkSns implements ISNS {
 						})
 						.then(async (response) => {
 							const dataCrawl = JSON.parse(response.body);
-							const res = await this.onSendDataHttpResponse({
+							await this.onSendDataHttpResponse({
 								body: JSON.stringify(dataCrawl),
 								sns: this.sns,
 								timestamp: new Date().toISOString(),
 								url: params.response.url,
 							});
-							console.log("data res", res);
 						})
 						.catch((err) => {});
 				}
