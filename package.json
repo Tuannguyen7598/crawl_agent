@@ -1,5 +1,5 @@
 {
-	"name": "sns-agent",
+	"name": "crawl-agent",
 	"version": "1.0.0",
 	"description": "Crawl data from web",
 	"main": "dist/src/app.js",
