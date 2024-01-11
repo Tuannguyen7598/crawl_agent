@@ -1,35 +1,4 @@
 
-# FROM ubuntu:latest
-
-
-# RUN apt-get update && \
-#     apt-get install -y curl && \
-#     curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
-#     apt-get install -y nodejs 
-
-
-# RUN apt-get install -y libgbm-dev gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget
-
-# RUN useradd -d /programmable-matter programmable-matter
-# USER programmable-matter
-
-# WORKDIR /app
-# COPY . .
-
-
-# USER root
-# RUN chown -R node /app
-# RUN chown root /app/node_modules/electron/dist/chrome-sandbox
-# RUN chmod 4755 /app/node_modules/electron/dist/chrome-sandbox
-# # RUN npm install -g npm@9.8.0 && npm install
-
-# EXPOSE 5555
-
-# USER programmable-matter
-# CMD  npm start 
-
-
-# use the version that corresponds to your electron version
 FROM node:18.16.0
 
 # install electron dependencies or more if your library has other dependencies
