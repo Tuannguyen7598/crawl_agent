@@ -18,13 +18,13 @@ export class GRPCServer {
 	}
 
 	protected onListend() {
-		// this.server.addService(AgentService, {
-		// 	sendActionDom: (
-		// 		data: ServerUnaryCall<ActionDOM, ResponseAgent>,
-		// 		callback: sendUnaryData<ResponseAgent>
-		// 	) => {
-		// 		this.manager.sendActionDOM(data, callback);
-		// 	},
-		// });
+		this.server.addService(AgentService, {
+			sendActionDom: (
+				data: ServerUnaryCall<ActionDOM, ResponseAgent>,
+				callback: sendUnaryData<ResponseAgent>
+			) => {
+				this.manager.sendActionDOM(data, callback);
+			},
+		});
 	}
 }

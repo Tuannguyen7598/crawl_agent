@@ -21,8 +21,8 @@ export class SnsWrapper implements ISNSListener {
 		return await this.client.sendDataDomHtlm(payload);
 	}
 
-	async initBrowser() {
-		return await this.sns.inItWebBrowser();
+	async initBrowser(url: string) {
+		return await this.sns.inItWebBrowser(url);
 	}
 
 	startCrawl() {

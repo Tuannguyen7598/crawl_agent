@@ -1,29 +1,29 @@
 import { ISNS, ISNSListener } from "../../abtraction/adapter/ISNS";
-import { BrowserWindow, ipcMain } from "electron";
+import { app, BrowserWindow, ipcMain } from "electron";
 import {
 	DataDOM,
 	DataFromHttpResponse,
 } from "../../infastructure/client/proto";
 import * as fs from "fs";
 import path from "path";
-export class UpworkSns implements ISNS {
+export class ElectronSns implements ISNS {
 	listener: ISNSListener;
-	sns: string = "upwork";
+	sns: string = "electron";
 	win: BrowserWindow;
 
 	constructor(public session_id: string) {
 		ipcMain.on("dom_click", (event, payload) => {
 			payload["type"] = "click";
-			payload["sns"] = "upwork";
+			payload["sns"] = "Electron";
 			this.onSendDataFromDomHTML(payload);
 		});
 		ipcMain.on("dom_input", (event, payload) => {
 			payload["type"] = "input";
-			payload["sns"] = "upwork";
+			payload["sns"] = "Electron";
 			this.onSendDataFromDomHTML(payload);
 		});
 	}
-	async inItWebBrowser(): Promise<void> {
+	async inItWebBrowser(url: string): Promise<void> {
 		try {
 			const preload = path.join(__dirname, "../preload/listen_event_dom.js");
 			this.win = new BrowserWindow({
@@ -38,7 +38,7 @@ export class UpworkSns implements ISNS {
 			this.win.on("closed", () => {
 				this.win = null;
 			});
-			await this.win.loadURL("https://www.upwork.com/");
+			await this.win.loadURL(url);
 		} catch (error) {
 			console.log(error);
 		}
@@ -83,12 +83,13 @@ export class UpworkSns implements ISNS {
 						})
 						.then(async (response) => {
 							const dataCrawl = JSON.parse(response.body);
-							await this.onSendDataHttpResponse({
+							const res = await this.onSendDataHttpResponse({
 								body: JSON.stringify(dataCrawl),
 								sns: this.sns,
 								timestamp: new Date().toISOString(),
 								url: params.response.url,
 							});
+							console.log("réponsesss", res);
 						})
 						.catch((err) => {});
 				}

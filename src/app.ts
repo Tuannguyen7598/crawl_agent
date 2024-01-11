@@ -43,4 +43,30 @@ async function boot() {
 	console.log("Server express running on:", port);
 	app.listen(port);
 }
-boot();
+
+if (electron.app.dock) electron.app.dock.hide();
+electron.app.on("window-all-closed", (e: any) => e.preventDefault());
+
+electron.app.on("session-created", (session) => {
+	console.log("New session-created...");
+	console.info(session);
+});
+
+const gotTheLock = electron.app.requestSingleInstanceLock();
+if (!gotTheLock) {
+	console.warn(
+		"[WARNING] Another SNS agent app stared already. Exiting this one..."
+	);
+	electron.app.exit();
+} else {
+	electron.app.on("second-instance", (event, commandLine, workingDirectory) => {
+		console.info(
+			"[INFO] You just started a new SNS agent. But it stopped due only one SNS agent at the same time accepted..."
+		);
+		console.info(event, commandLine, workingDirectory);
+	});
+}
+
+electron.app.on("ready", async () => {
+	boot();
+});

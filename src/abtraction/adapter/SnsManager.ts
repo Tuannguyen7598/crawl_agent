@@ -8,9 +8,9 @@ export class SnsManager {
 	list_wrapper: Map<string, SnsWrapper> = new Map();
 	constructor(private client: IClient) {}
 
-	async createSns(sns: ISNS) {
+	async createSns(sns: ISNS, url: string) {
 		const wrapper = new SnsWrapper(sns, this.client);
-		await wrapper.initBrowser();
+		await wrapper.initBrowser(url);
 		this.list_wrapper.set(wrapper.sesison_id, wrapper);
 		wrapper.startCrawl();
 	}
@@ -27,15 +27,6 @@ export class SnsManager {
 			throw new Error("SNS not found");
 		}
 		return sns;
-	}
-
-	async sendDataHttpResponse() {
-		this.client.sendDataHttpResponse({
-			body: "123",
-			sns: "kjk",
-			timestamp: "ghh",
-			url: "ssd",
-		});
 	}
 
 	async sendActionDOM(

@@ -13,7 +13,7 @@ export interface ISNS {
 	listener: ISNSListener | undefined;
 	session_id: string;
 
-	inItWebBrowser(): Promise<void>;
+	inItWebBrowser(url: string): Promise<void>;
 	startCrawlData(): void;
 	actionClick(payload: any): Promise<boolean>;
 	actionInput(payload: any): Promise<boolean>;

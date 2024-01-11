@@ -1,34 +1,30 @@
 import express from "express";
 import { SnsManager } from "../../abtraction/adapter/SnsManager";
-import { LinkedlnSns } from "../../core.business/linkedln/linkedln.sns";
-import { UpworkSns } from "../../core.business/upwork/upwork.sns";
+import { PuppeteerSns } from "../../core.business/puppeteer";
+import { ElectronSns } from "../../core.business/electron";
+
 export class ExpressServer {
 	constructor(app: express.Application, private manager: SnsManager) {
-		app.post("/linkedln/start", this.onLinkedLnStart);
-		app.post("/upwork/start", this.onUpWorkStart);
-		app.post("/test", this.onTest);
+		app.post("/puppeteer/start", this.onPuppeteerStart);
+		app.post("/electron/start", this.onElectronStart);
 	}
 
-	onLinkedLnStart = (req: express.Request, res: express.Response) => {
-		let session_id = "linkedln" + "_" + new Date().getTime();
+	onPuppeteerStart = (req: express.Request, res: express.Response) => {
+		let session_id = "puppeteer" + "_" + new Date().getTime();
 		if (req.body?.session_id) {
 			session_id = req.body?.session_id;
 		}
-		const sns = new LinkedlnSns(session_id);
-		this.manager.createSns(sns);
+		const sns = new PuppeteerSns(session_id);
+		this.manager.createSns(sns, req.body.url);
 		res.status(200).json({ session_id: session_id });
 	};
-	onUpWorkStart = (req: express.Request, res: express.Response) => {
-		let session_id = "upwork" + "_" + new Date().getTime();
+	onElectronStart = (req: express.Request, res: express.Response) => {
+		let session_id = "electron" + "_" + new Date().getTime();
 		if (req.body?.session_id) {
 			session_id = req.body?.session_id;
 		}
-		const sns = new UpworkSns(session_id);
-		this.manager.createSns(sns);
+		const sns = new ElectronSns(session_id);
+		this.manager.createSns(sns, req.body.url);
 		res.status(200).json({ session_id: session_id });
-	};
-	onTest = (req: express.Request, res: express.Response) => {
-		this.manager.sendDataHttpResponse();
-		res.status(200).json({ status: "oke" });
 	};
 }
