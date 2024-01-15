@@ -17,4 +17,12 @@ export interface ISNS {
 	startCrawlData(): void;
 	actionClick(payload: any): Promise<boolean>;
 	actionInput(payload: any): Promise<boolean>;
+
+	addActionToDom(element: string, action: ActionDom): Promise<any>;
+}
+
+export enum ActionDom {
+	CLICK = "action_click",
+	SCROLL = "action_scroll",
+	INPUT = "action_input",
 }

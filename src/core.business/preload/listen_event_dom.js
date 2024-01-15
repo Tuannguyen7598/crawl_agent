@@ -1,11 +1,9 @@
 (function startListen() {
-	const elementValueCLick = new Map();
-	const elementValueInput = new Map();
 	const { ipcRenderer } = require("electron");
 	document.addEventListener("click", (ev) => {
 		const targetElement = ev.target;
 		ipcRenderer.send("dom_click", {
-			id: targetElement.id ?? "",
+			id: targetElement.id,
 			innerText: targetElement.innerText ?? "",
 			name: targetElement.name ?? "",
 			value: targetElement.value ?? "",

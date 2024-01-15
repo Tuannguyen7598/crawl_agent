@@ -1,4 +1,4 @@
-import { Metadata, Server, credentials } from "@grpc/grpc-js";
+import { credentials } from "@grpc/grpc-js";
 import { IClient } from "../../abtraction/adapter/IClient";
 import {
 	AgentClient,
@@ -6,7 +6,6 @@ import {
 	DataFromHttpResponse,
 	ResponseAgent,
 } from "./proto";
-import { Config_Variable } from "../../config/config_variable";
 
 export class ClientgRPC implements IClient {
 	client: AgentClient;

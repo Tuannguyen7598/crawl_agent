@@ -1,7 +1,7 @@
 import { ServerUnaryCall, sendUnaryData } from "@grpc/grpc-js";
 import { ActionDOM, ResponseAgent } from "../../infastructure/client/proto";
 import { IClient } from "./IClient";
-import { ISNS, ISNSListener } from "./ISNS";
+import { ActionDom, ISNS, ISNSListener } from "./ISNS";
 import { SnsWrapper } from "./SnsWrapper";
 
 export class SnsManager {
@@ -12,7 +12,7 @@ export class SnsManager {
 		const wrapper = new SnsWrapper(sns, this.client);
 		await wrapper.initBrowser(url);
 		this.list_wrapper.set(wrapper.sesison_id, wrapper);
-		wrapper.startCrawl();
+		// wrapper.startCrawl();
 	}
 
 	async startCrawlAll() {
@@ -34,7 +34,7 @@ export class SnsManager {
 		callback: sendUnaryData<ResponseAgent>
 	) {
 		const sns = this.findSns(payload.request.sessionId);
-		const result = await sns.sendActionDom(
+		const result = await sns.onSendActionDom(
 			payload.request.actionType,
 			payload.request.payload
 		);
@@ -42,5 +42,13 @@ export class SnsManager {
 			callback(null, { message: "SUCCESS", status: true });
 		}
 		callback(null, { message: "ERROR", status: false });
+	}
+
+	async addActionToDom(session_id: string, element: string, action: ActionDom) {
+		const sns = this.list_wrapper.get(session_id);
+		if (!sns) {
+			throw new Error("NOT_FOUND_SNS");
+		}
+		sns.addActionToDom(element, action);
 	}
 }

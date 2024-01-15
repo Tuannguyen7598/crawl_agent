@@ -4,7 +4,7 @@ import {
 	ResponseAgent,
 } from "../../infastructure/client/proto";
 import { IClient } from "./IClient";
-import { ISNS, ISNSListener } from "./ISNS";
+import { ActionDom, ISNS, ISNSListener } from "./ISNS";
 export class SnsWrapper implements ISNSListener {
 	sesison_id: string;
 	constructor(private sns: ISNS, private client: IClient) {
@@ -21,6 +21,16 @@ export class SnsWrapper implements ISNSListener {
 		return await this.client.sendDataDomHtlm(payload);
 	}
 
+	onSendActionDom(type: string, payload: any): Promise<boolean> {
+		switch (type) {
+			case "click":
+				return this.sns.actionClick(payload);
+
+			case "input":
+				return this.sns.actionInput(payload);
+		}
+	}
+
 	async initBrowser(url: string) {
 		return await this.sns.inItWebBrowser(url);
 	}
@@ -29,13 +39,7 @@ export class SnsWrapper implements ISNSListener {
 		this.sns.startCrawlData();
 	}
 
-	sendActionDom(type: string, payload: any): Promise<boolean> {
-		switch (type) {
-			case "click":
-				return this.sns.actionClick(payload);
-
-			case "input":
-				return this.sns.actionInput(payload);
-		}
+	addActionToDom(element: string, action: ActionDom) {
+		return this.sns.addActionToDom(element, action);
 	}
 }

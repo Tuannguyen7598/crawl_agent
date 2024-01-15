@@ -1,11 +1,11 @@
-import { ISNS, ISNSListener } from "../../abtraction/adapter/ISNS";
+import { ActionDom, ISNS, ISNSListener } from "../../abtraction/adapter/ISNS";
 import { app, BrowserWindow, ipcMain } from "electron";
 import {
 	DataDOM,
 	DataFromHttpResponse,
 } from "../../infastructure/client/proto";
-import * as fs from "fs";
 import path from "path";
+
 export class ElectronSns implements ISNS {
 	listener: ISNSListener;
 	sns: string = "electron";
@@ -15,12 +15,14 @@ export class ElectronSns implements ISNS {
 		ipcMain.on("dom_click", (event, payload) => {
 			payload["type"] = "click";
 			payload["sns"] = "Electron";
-			this.onSendDataFromDomHTML(payload);
+			console.log(payload);
+
+			// this.onSendDataFromDomHTML(payload);
 		});
 		ipcMain.on("dom_input", (event, payload) => {
 			payload["type"] = "input";
 			payload["sns"] = "Electron";
-			this.onSendDataFromDomHTML(payload);
+			// this.onSendDataFromDomHTML(payload);
 		});
 	}
 	async inItWebBrowser(url: string): Promise<void> {
@@ -89,14 +91,19 @@ export class ElectronSns implements ISNS {
 								timestamp: new Date().toISOString(),
 								url: params.response.url,
 							});
-							console.log("réponsesss", res);
+							console.log("response", res);
 						})
-						.catch((err) => {});
+						.catch(() => {});
 				}
 			});
 			this.win?.webContents.debugger.sendCommand("Network.enable");
 		} catch (err) {
 			console.log("Debugger attach failed: ", err);
 		}
+	}
+
+	addActionToDom(element: string, action: ActionDom): Promise<any> {
+		ipcMain.emit(action, element);
+		return;
 	}
 }

@@ -1,6 +1,5 @@
 import puppeteer, { Page } from "puppeteer";
-import { ISNS, ISNSListener } from "../../abtraction/adapter/ISNS";
-import { BrowserWindow } from "electron";
+import { ActionDom, ISNS, ISNSListener } from "../../abtraction/adapter/ISNS";
 import { DataDOM } from "../../infastructure/client/proto";
 export class PuppeteerSns implements ISNS {
 	listener: ISNSListener;
@@ -40,5 +39,9 @@ export class PuppeteerSns implements ISNS {
 
 	protected onSendDataFromDomHTML(payload: DataDOM): void {
 		this.listener.onSendDataDOMHtml(payload);
+	}
+
+	addActionToDom(element: string, action: ActionDom): Promise<any> {
+		throw new Error("NOT_IMPLEMENT");
 	}
 }
